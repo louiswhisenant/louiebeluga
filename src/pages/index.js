@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { Spinner } from '../loading/Loading';
 import '../styles/main.scss';
 import images from '../utilities/images';
 
@@ -11,6 +12,20 @@ const IndexPage = () => {
 		alt: '',
 		name: '',
 	});
+	const [loading, setLoading] = useState(true);
+	const counter = useRef(0);
+	const imageLoaded = () => {
+		counter.current += 1;
+		if (counter.current == images.length) {
+			console.log(
+				'image loaded:',
+				counter.current,
+				loading,
+				images.length
+			);
+			setLoading(false);
+		}
+	};
 
 	const handleModal = (image) => {
 		setModalContent({
@@ -24,6 +39,8 @@ const IndexPage = () => {
 
 	return (
 		<main id='index-page'>
+			<Spinner loading={loading} />
+
 			<title>Louie Beluga || Creative Portfolio</title>
 			<div className={`modal ${modal ? 'modal-open' : 'modal-closed'}`}>
 				<button
@@ -38,13 +55,14 @@ const IndexPage = () => {
 				/>
 			</div>
 
-			<div className='masonry-with-columns'>
+			<div
+				className='masonry-with-columns'
+				style={{ display: loading ? 'none' : 'block' }}>
 				{images.map((image) => {
 					return (
 						<a
 							href='#!'
-							key={image.img}
-							id={images.indexOf(image)}
+							key={image.full}
 							className='masonry-block'
 							onClick={() => {
 								handleModal(image);
@@ -52,8 +70,9 @@ const IndexPage = () => {
 							<div className='masonry-block-filter'></div>
 							<img
 								className='masonry-block-img'
-								src={image.thumb}
+								src={image.full}
 								alt={image.alt}
+								onLoad={imageLoaded}
 							/>
 						</a>
 					);

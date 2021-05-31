@@ -1,8 +1,10 @@
 import React from 'react';
 
-export const Spinner = () => {
+export const Spinner = ({ loading }) => {
 	return (
-		<div className='page-wrapper spinner-anchor'>
+		<div
+			className='spinner-anchor'
+			style={{ display: loading ? 'flex' : 'none' }}>
 			<div className='lds-ring'>
 				<div></div>
 				<div></div>
