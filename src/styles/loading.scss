@@ -1,11 +1,16 @@
 // -------------- Spinner -------------- //
-.spinner-anchor {
+.spinner-anchor,
+.percentage-anchor {
 	height: 100vh;
 	width: 100vw;
 	overflow: hidden;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	color: $medium;
+	font-family: $font-2;
+	position: relative;
 
 	.lds-ring {
 		display: inline-block;
@@ -20,10 +25,10 @@
 		width: 64px;
 		height: 64px;
 		margin: 8px;
-		border: 8px solid $color-2;
+		border: 8px solid $light;
 		border-radius: 50%;
 		animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-		border-color: $color-2 transparent transparent transparent;
+		border-color: $light transparent transparent transparent;
 	}
 	.lds-ring div:nth-child(1) {
 		animation-delay: -0.45s;
@@ -33,6 +38,21 @@
 	}
 	.lds-ring div:nth-child(3) {
 		animation-delay: -0.15s;
+	}
+
+	.filler {
+		background-color: lighten($dark, 5%);
+		position: fixed;
+		border-radius: 50%;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		transition: height 1s ease-out, width 1s ease-out;
+	}
+
+	.percentage {
+		font-size: 10rem;
+		z-index: 5;
 	}
 
 	@keyframes lds-ring {

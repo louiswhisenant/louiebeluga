@@ -5,6 +5,7 @@
 // font-family: 'Orelega One', cursive;
 
 $dark: #111111;
+$medium: #333;
 $light: #eeeeee;
 // $color-1: #d4e9eb;
 // $color-2: #af622e;
@@ -25,6 +26,7 @@ $bp-xxl: 1400px;
 
 :export {
 	light: $light;
+	medium: $medium;
 	dark: $dark;
 	colorOne: $color-1;
 	colorOne25: rgba($color-1, 0.25);

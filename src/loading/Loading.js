@@ -14,3 +14,19 @@ export const Spinner = ({ loading }) => {
 		</div>
 	);
 };
+
+export const PercentageLoader = ({ loading, percentage }) => {
+	return (
+		<div
+			className='percentage-anchor'
+			style={{ display: loading ? 'flex' : 'none' }}>
+			<div
+				className='filler'
+				style={{
+					height: `${percentage}vw`,
+					width: `${percentage}vw`,
+				}}></div>
+			<p className='percentage'>{percentage}%</p>
+		</div>
+	);
+};

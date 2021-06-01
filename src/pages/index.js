@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Spinner } from '../loading/Loading';
+import { PercentageLoader } from '../loading/Loading';
 import '../styles/main.scss';
 import images from '../utilities/images';
 
@@ -13,10 +13,12 @@ const IndexPage = () => {
 		name: '',
 	});
 	const [loading, setLoading] = useState(true);
+	const [percentage, setPercentage] = useState(0);
 	const counter = useRef(0);
 	const imageLoaded = () => {
 		counter.current += 1;
-		if (counter.current == images.length) {
+		setPercentage(Math.floor((counter.current / images.length) * 100));
+		if (counter.current === images.length) {
 			console.log(
 				'image loaded:',
 				counter.current,
@@ -39,7 +41,7 @@ const IndexPage = () => {
 
 	return (
 		<main id='index-page'>
-			<Spinner loading={loading} />
+			<PercentageLoader loading={loading} percentage={percentage} />
 
 			<title>Louie Beluga || Creative Portfolio</title>
 			<div className={`modal ${modal ? 'modal-open' : 'modal-closed'}`}>
@@ -66,6 +68,11 @@ const IndexPage = () => {
 							className='masonry-block'
 							onClick={() => {
 								handleModal(image);
+							}}
+							style={{
+								animation: `loaded ${
+									Math.random() + 1
+								}s ease-out`,
 							}}>
 							<div className='masonry-block-filter'></div>
 							<img

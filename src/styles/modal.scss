@@ -6,16 +6,22 @@
 	height: 100vh;
 	background-color: $dark;
 	overflow: hidden;
+	transition: opacity 0.5s ease;
 
 	&.modal-open {
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		z-index: 100;
+		opacity: 1;
 	}
 
 	&.modal-closed {
-		display: none;
+		opacity: 0;
+
+		.modal-img {
+			display: none;
+		}
 	}
 
 	.close-modal-btn {
